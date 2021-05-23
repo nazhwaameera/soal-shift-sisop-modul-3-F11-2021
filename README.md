@@ -197,7 +197,5 @@ if(strcmp(argv[1], "-d") == 0)
 ```
 ```C
 if(!listFilesRecursively(dir))
-{
     printf("Yah, gagal disimpan :(\n"); // jika gagal
-}
 ```
