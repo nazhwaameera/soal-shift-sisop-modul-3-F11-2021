@@ -15,7 +15,7 @@ Program menerima opsi -f dimana pengguna bisa menambahkan argumen file yang bisa
 
 **File 2 : Sad, gagal:( (jika gagal)**
 
-Berikut adalah fungsi ```moveFile2``` khusus untuk memindahkan dan mengkategorikan file.
+Berikut adalah fungsi ```moveFile2``` untuk memindahkan dan mengkategorikan file pada opsi -f :
 ```C
 void* moveFile2(void *arg) // untuk opsi -f
 {
@@ -94,5 +94,27 @@ void* moveFile2(void *arg) // untuk opsi -f
     }
     remove(asal); // menghapus file lama
     return 0;
+}
+```
+Dan berikut fungsi untuk opsi -f :
+```C
+if(strcmp(argv[1], "-f") == 0)
+{
+    for(x = (1 + 1); x < argc; x++)
+    {
+        if(start(argv[x]))
+        { 
+            pthread_create(&(T[x - 2]), 0, moveFile2, (void *)argv[x]); // untuk thread
+            printf("File %d : Berhasil Dikategorikan\n", x - 1); 
+        }
+        else
+        {
+            printf("File %d : Sad, Gagal :(\n", x - 1);
+        }
+    }
+    for(x = 0; x < argc - 2; x++)
+    {
+        pthread_join(T[x], 0);
+    }
 }
 ```
