@@ -247,3 +247,6 @@ void cekExt(char* namafile, char *ext1) // cek extension
 }
 ```
 File yang tidak memiliki extension dibelakanganya akan dikategorikan sebagai Unknown. Sedangkan untuk nama extension yang ditulis dengan uppercase dapat diubah menjadi lowercase dengan menggunakan tolower seperti diatas.
+- Output :
+Untuk folder Hidden dan Unknown sudah terbentuk dan bisa dilihat pada gambar diatas, folder Hidden tidak berisikan apa-apa, dan untuk folder Unknown berikut isinya.
+<img width="683" alt="Screen Shot 2021-05-23 at 15 47 56" src="https://user-images.githubusercontent.com/74484044/119254045-5483f500-bbde-11eb-8480-424138ac3ee7.png">
