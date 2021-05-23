@@ -196,6 +196,7 @@ if(strcmp(argv[1], "-d") == 0)
     printf("Direktori sukses disimpan!\n"); // jika berhasil
 ```
 ```C
-if(!listFilesRecursively(dir))
+if(!fungsiRekursif(dir))
     printf("Yah, gagal disimpan :(\n"); // jika gagal
 ```
+- Output :
