@@ -163,8 +163,8 @@ void exec3() {
 }
 ```
 Hasil:
-
-
+![VirtualBox_Ubuntu 2 0_23_05_2021_17_03_22](https://user-images.githubusercontent.com/68385532/119256948-55705300-bbed-11eb-9d84-41cc233c92c3.png)
+![VirtualBox_Ubuntu 2 0_23_05_2021_17_04_06](https://user-images.githubusercontent.com/68385532/119256944-530df900-bbed-11eb-812b-7d0852b444bc.png)
 
 ## Soal 3
 Seorang mahasiswa bernama Alex sedang mengalami masa gabut, dan ia memikirkan untuk merapikan sejumlah file yang ada di laptopnya. Karena jumlah filenya terlalu banyak, Alex meminta saran ke Ayub. Ayub menyarankan untuk membuat sebuah program C agar file-file dapat dikategorikan. Program ini akan memindahkan file ke dalam folder sesuai ekstensinya yang folder hasilnya terdapat di working directory ketika program kategori tersebut dijalankan.
