@@ -200,3 +200,8 @@ if(!fungsiRekursif(dir))
     printf("Yah, gagal disimpan :(\n"); // jika gagal
 ```
 - Output :
+Kita akan mengkategorikan file yang berada pada direktori soal3 seperti berikut.
+<img width="568" alt="Screen Shot 2021-05-23 at 15 21 19" src="https://user-images.githubusercontent.com/74484044/119253265-a0cd3600-bbda-11eb-8af8-c17289f48e1f.png">
+<img width="565" alt="Screen Shot 2021-05-23 at 15 21 33" src="https://user-images.githubusercontent.com/74484044/119253266-a1fe6300-bbda-11eb-9b1e-d9e012b6ee50.png">
+Dan akan dipindahkan di current working directory dimana tempat kodingan C berada.
+<img width="692" alt="Screen Shot 2021-05-23 at 15 20 41" src="https://user-images.githubusercontent.com/74484044/119253268-a32f9000-bbda-11eb-92c9-5d89b65b02f7.png">
