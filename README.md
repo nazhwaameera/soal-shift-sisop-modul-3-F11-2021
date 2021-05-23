@@ -193,7 +193,7 @@ Menggunakan ```strcmp``` untuk membandingkan argumen input apakah sesuai dengan 
 - Hasil yang ditampilkan :
 ```C
 if(strcmp(argv[1], "-d") == 0)
-        printf("Direktori sukses disimpan!\n"); // jika berhasil
+    printf("Direktori sukses disimpan!\n"); // jika berhasil
 ```
 ```C
 if(!listFilesRecursively(dir))
