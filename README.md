@@ -177,3 +177,27 @@ Untuk membuat direktori berupa kategori dari path yang diinputkan dengan ```mkdi
 
 ### Bagian b
 Program juga dapat menerima opsi -d untuk melakukan pengkategorian pada suatu directory. Namun pada opsi -d ini, user hanya bisa memasukkan input 1 directory saja, tidak seperti file yang bebas menginput file sebanyak mungkin. Lalu hasilnya akan disimpan di working directory dimana program C tersebut berjalan (hasil kategori filenya bukan di /path/to/directory). Dengan output yakni *"Direktori sukses disimpan!"* jika berhasil, dan *"Yah, gagal disimpan :("* jika gagal.
+
+- Menerima argumen -d :
+```C
+else if(strcmp(argv[1], "-d") == 0)
+{
+    if(argc == 3) // bisa menerima 1 path
+    {
+        strcpy(dir, argv[2]);
+    }
+}
+```
+Menggunakan ```strcmp``` untuk membandingkan argumen input apakah sesuai dengan argumen input yang diminta yakni -d. Command -d akan dilaksanakan jika hanya memasukkan 1 path saja, maka menggunakan argc == 3. Path tersebut akan disimpan di sebuah char dir.
+
+- Hasil yang ditampilkan :
+```C
+if(strcmp(argv[1], "-d") == 0)
+        printf("Direktori sukses disimpan!\n"); // jika berhasil
+```
+```C
+if(!listFilesRecursively(dir))
+{
+    printf("Yah, gagal disimpan :(\n"); // jika gagal
+}
+```
