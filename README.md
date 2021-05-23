@@ -9,7 +9,7 @@ Repository soal shift sisop modul 3 kelompok 11 kelas F
 Seorang mahasiswa bernama Alex sedang mengalami masa gabut, dan ia memikirkan untuk merapikan sejumlah file yang ada di laptopnya. Karena jumlah filenya terlalu banyak, Alex meminta saran ke Ayub. Ayub menyarankan untuk membuat sebuah program C agar file-file dapat dikategorikan. Program ini akan memindahkan file ke dalam folder sesuai ekstensinya yang folder hasilnya terdapat di working directory ketika program kategori tersebut dijalankan.
 
 ### Bagian a
-Program menerima opsi -f dimana pengguna bisa menambahkan argumen file yang bisa dikategorikan sebanyak yang diinginkan oleh pengguna. Dengan output yakni *File 1 : Berhasil dikategorikan* jika berhasil dikategorikan, *File 2 : Sad, gagal:(* jika gagal.
+Program menerima opsi -f dimana pengguna bisa menambahkan argumen file yang bisa dikategorikan sebanyak yang diinginkan oleh pengguna. Dengan output yakni *File 1 : Berhasil dikategorikan* jika berhasil, *File 2 : Sad, gagal:(* jika gagal.
 
 Berikut adalah fungsi ```moveFile2``` untuk memindahkan dan mengkategorikan file pada opsi -f :
 ```C
