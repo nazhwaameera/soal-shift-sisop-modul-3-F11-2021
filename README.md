@@ -217,3 +217,7 @@ else if(strcmp(argv[1], "*") == 0)
 ```
 Menggunakan ```strcmp``` untuk membandingkan argumen input, apakah sesuai dengan argumen input yang diminta yakni * dan path tersebut akan disimpan di sebuah char dir.
 - Output :
+Sebelum menjalankan argumen *
+<img width="672" alt="Screen Shot 2021-05-23 at 15 35 38" src="https://user-images.githubusercontent.com/74484044/119253727-c65b3f00-bbdc-11eb-9e84-106e0aa58e48.png">
+Sesudah menjalankan argumen * maka seluruh file yang ada akan masuk ke dalam folder sesuai dengan kategorinya masing-masing.
+<img width="688" alt="Screen Shot 2021-05-23 at 15 36 48" src="https://user-images.githubusercontent.com/74484044/119253729-c78c6c00-bbdc-11eb-8377-6c1c8dca4ee8.png">
