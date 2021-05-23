@@ -139,5 +139,41 @@ ndir = strchr(file, y);
 ```
 ```strrchr``` digunakan untuk mendapatkan string yang dipisahkan dengan tanda / dengan mengecek dari string bagian belakang. Sedangkan, ```strchr``` digunakan untuk mendapatkan string yang dipisahkan dengan tanda . dengan mengecek dari string bagian depan.
 
+```C
+if(dir)
+{
+    if(cekFile(file)) // ngecek file/dir ada apa ngga
+    {
+        cekExt(dir + 1, ext);
+    }
+    else
+    {
+        return 0;
+    }
+}
+```
+Jika path yang dicek merupakan direktori atau file, maka akan mengecek apakah path file tersebut memang ada dengan fungsi cekFile. Jika ada, maka akan memisahkan extension dari nama file tersebut dengan fungsi cekExt yang akan dijelaskan pada bagian 3d.
+```C
+mkdir(ext, 0777); // extension dir
+
+//src
+char path[1000];
+strcpy(path, (char*) argc);
+    
+//dst
+char fileCat[1000];
+getcwd(fileCat, sizeof(path));
+strcat(fileCat, "/");
+strcat(fileCat, ext);
+strcat(fileCat, "/");
+strcat(fileCat, dir + 1);
+printf("%s\n%s\n", path, fileCat);
+rename(path, fileCat);
+    
+return(void *) 1;
+pthread_exit(0);
+```
+Untuk membuat direktori berupa kategori dari path yang diinputkan dengan mkdir. Kemudian, direktori tersebut disimpan pada current working directory dengan melakukan rename pada path awal dari direktori tersebut.
+
 ### Bagian b
 Program juga dapat menerima opsi -d untuk melakukan pengkategorian pada suatu directory. Namun pada opsi -d ini, user hanya bisa memasukkan input 1 directory saja, tidak seperti file yang bebas menginput file sebanyak mungkin. Lalu hasilnya akan disimpan di working directory dimana program C tersebut berjalan (hasil kategori filenya bukan di /path/to/directory). Dengan output yakni *"Direktori sukses disimpan!"* jika berhasil, dan *"Yah, gagal disimpan :("* jika gagal.
