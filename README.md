@@ -12,4 +12,5 @@ Seorang mahasiswa bernama Alex sedang mengalami masa gabut, dan ia memikirkan un
 Program menerima opsi -f dimana pengguna bisa menambahkan argumen file yang bisa dikategorikan sebanyak yang diinginkan oleh pengguna. Dengan contoh output sebagai berikut.
 
 **File 1 : Berhasil dikategorikan (jika berhasil)
+
 File 2 : Sad, gagal:( (jika gagal)**
