@@ -4,6 +4,167 @@ Repository soal shift sisop modul 3 kelompok 11 kelas F
 ## Soal 1
 
 ## Soal 2
+Crypto (kamu) adalah teman Loba. Pada suatu padi, Crypto melihat Loba yang sedang kewalahan mengerjakan tugas dari bosnya. Karena Crypto adalah orang yang sangat menyukai tantangan, dia ingin membantu Loba mengerjakan tugasnya. Detail dari tugas tersebut adalah:
+a.	Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya. Matriks nantinya akan berisi angka 1-20
+b.	Membuat program dengan menggunakan matriks output dari program sebelumnya (program soal 2a.c) (Catatan!: gunakan shared memory). Kemudian matriks tersebut akan dilakukan perhitungan dengan matriks varu (input user) sebagai berikut contoh perhitungan untuk matriks yang ada. Perhitungannya adalah setiap sel yang berasal dari matriks A menjadi angka untuk faktorial, lalu sel dari matriks B menjadi batas maksimal faktorialnya (dari paling besar ke paling kecil) (Catatan!: guankan thread untuk perhitungan di setiap sel).
+c.	Karena takut lag dalam pengerjaannya membantu Loba, Crypto juga membuat program (soal2c.c) untuk mengecek 5 proses teratas apa saja yang memakan resource komputernya dengan command “ps aux | sort -nrk 3,3 | head -5” (Catatan!: harus menggunakan IPC Pipes)
+Dari soal di atas, dapat diketahui bahwa kita diminta untuk:
+1.	Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya
+2.	Menyimpan hasil perkalian program perkalian matriks tersebut ke dalam shared memory
+3.	Membuat program yang menerima input berupa matriks 4 × 6 untuk kemudian dioperasikan dengan matriks hasil perkalian program pertama
+4.	Membuat program untuk mengecek 5 proses teratas yang  memakan resource komputer menggunakan IPC Pipes dan command “ps aux | sort -nrk 3,3 | head -5”
+Untuk menyelesaikannya, dibuat program seperti di bawah ini.
+Untuk menyelesaikan nomor 1, kita menggunakan  
+```C
+for(c = 0; c < 4; c++)
+    {
+        for(d = 0; d < 6; d++)
+        {
+            for(k = 0; k < 3; k++)
+            {
+                sum = sum + first[c][k] * second[k][d];
+            }
+            
+            value[c][d] = sum;
+            sum = 0;
+        }
+    }
+```
+Program ini akan menghitung perkalian matriks 4 × 3 dengan 3 × 6 yang telah diinputkan dan menyimpan hasilnya di array value.
+Array 4 × 3 dengan 3 × 6 sendiri disimpan menggunakan array.
+Seperti yang kita ketahui, program kedua meminta kita untuk mengoperasikan matriks baru dengna matriks hasil perkalian 4 × 3 dengan 3 × 6 yang kita dapat dari program ini. Untuk itu, kita perlu menyimpan matriks hasil perkalian program ini ke dalam shared memory. Syntax untuk shared memory adalah
+```C
+key_t key = 1234;
+    int (*value)[6];
+    int shmid = shmget(key, sizeof(int[4][6]), IPC_CREAT | 0666);
+    value = shmat(shmid, NULL, 0);
+```
+Operasi yang diminta dalam soal dapat dituliskan seperti di bawah
+```C
+int selisih(int n, int m)
+{
+    if(n == 0 || m == 0)
+    {
+    	hasil = 0;
+    }
+    return n - m;
+}
+
+long long jumlah(long long n)
+{
+    if(n != 0)
+    {
+        return  n * jumlah(n - 1);
+    }
+    else
+    {
+        return 1;
+    }
+}
+
+void *faktorial(void* n)
+{
+    long long angka = *(long long*)n;
+    if(hasil == 0)
+    {
+	printf("0\t");
+    }
+    else if(dikurangkan >= 1) // a >= b
+    {
+        printf("%lld\t", jumlah(angka)/jumlah(dikurangkan));
+        
+    }
+    else if(dikurangkan < 1) //b > a
+    {
+        printf("%lld\t", jumlah(angka));
+      
+    }
+}
+```
+Ketiga fungsi di atas digunakan dalam perhitungan faktorial seperti yang diminta dalam soal. Fungsi selisih mengomputasi terlebih dahulu berapa selisih elemen dari kedua matriks yang menempati posisi yang sama, fungsi ini juga sekaligus mengecek apakah ada salah satu di antara kedua elemen yang bernilai 0, apabila ada, fungsi akan mengembalikan nilai 0 juga.  Hasil perhitungan selisih kemudian digunaka pula untuk mengklasifikasikan apakah elemen matriks A lebih besar atau lebih kecil dari elemen matriks B dari posisi yang sama. Apabila lebih besar, elemen tersebut akan difaktorialkan kemudian dibagi dengan hasil faktorial selisih elemen bilangan A dengan B. Apabila lebih kecil, fungsi akan mengembalikan hasil faktorial dari elemen A.
+Kita perlu mengakses shared memory dan membuat thread untuk soal kali ini.
+```C
+key_t key = 1234;
+    int (*value)[6];
+    int shmid = shmget(key, sizeof(int[4][6]), IPC_CREAT | 0666);
+    value = shmat(shmid, NULL, 0);
+
+pthread_t tid[24];
+Setelah menginisiasi thread dan shared memorynya, fungsi berikut akan mengakses shared memory tersebut dan membuat thread untuk setiap proses komputasinya.
+for(c = 0; c < 4; c++)
+    {
+        for(d = 0; d < 6; d++)
+        {
+            long long *k = malloc(sizeof(long long[4][6]));
+            *k = value[c][d];
+            //printf("%d\n", value[c][d]);
+            hasil = 1;
+            dikurangkan = selisih(value[c][d], second[c][d]);
+            pthread_create(&tid[index], NULL, &faktorial, k);
+           // printf("\t");
+            index++;
+            sleep(1);
+        }
+        printf("\n");
+    }
+```
+Kita kemudian menggabungkan semua thread yang sudah selesai menggunakan 
+```C
+for(int i = 0; i < index; i++)
+    {
+        pthread_join(tid[i], NULL);
+    }
+```
+Untuk subsoal terakhir, kita diminta untuk mengecek 5 proses teratas yang memakan resource komputer menggunakan command “ps aux | sort -nrk 3,3 | head -5” dan IPC Pipes
+```C
+int pid;
+int pipe1[2];
+int pipe2[2];
+
+void exec1() {
+  // input from stdin (already done)
+  // output to pipe1
+  dup2(pipe1[1], 1);
+  // close fds
+  close(pipe1[0]);
+  close(pipe1[1]);
+  // exec
+  execlp("ps", "ps", "aux", NULL);
+  _exit(1);
+}
+
+void exec2() {
+  // input from pipe1
+  dup2(pipe1[0], 0);
+  // output to pipe2
+  dup2(pipe2[1], 1);
+  // close fds
+  close(pipe1[0]);
+  close(pipe1[1]);
+  close(pipe2[0]);
+  close(pipe2[1]);
+  // exec
+  execlp("sort", "sort", "-nrk", "3.3", NULL);
+
+  _exit(1);
+}
+
+void exec3() {
+  // input from pipe2
+  dup2(pipe2[0], 0);
+  // output to stdout (already done)
+  // close fds
+  close(pipe2[0]);
+  close(pipe2[1]);
+  // exec
+  execlp("head", "head", "-5", NULL);
+ 
+  _exit(1);
+}
+```
+Hasil:
+
+
 
 ## Soal 3
 Seorang mahasiswa bernama Alex sedang mengalami masa gabut, dan ia memikirkan untuk merapikan sejumlah file yang ada di laptopnya. Karena jumlah filenya terlalu banyak, Alex meminta saran ke Ayub. Ayub menyarankan untuk membuat sebuah program C agar file-file dapat dikategorikan. Program ini akan memindahkan file ke dalam folder sesuai ekstensinya yang folder hasilnya terdapat di working directory ketika program kategori tersebut dijalankan.
