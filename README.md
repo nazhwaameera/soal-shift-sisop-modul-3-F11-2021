@@ -250,3 +250,22 @@ File yang tidak memiliki extension dibelakanganya akan dikategorikan sebagai Unk
 - Output :
 Untuk folder Hidden dan Unknown sudah terbentuk dan bisa dilihat pada gambar diatas, folder Hidden tidak berisikan apa-apa, dan untuk folder Unknown berikut isinya.
 <img width="683" alt="Screen Shot 2021-05-23 at 15 47 56" src="https://user-images.githubusercontent.com/74484044/119254045-5483f500-bbde-11eb-8480-424138ac3ee7.png">
+
+### Bagian e
+Setiap 1 file yang dikategorikan dioperasikan oleh 1 thread agar bisa berjalan secara paralel sehingga proses pengkategorian bisa berjalan lebih cepat.
+```C
+pthread_t tid2[indeks];
+int i = 0, j = 0;
+while(i < indeks)
+{
+    pthread_create(&tid2[i], NULL, moveFile, (void *)save[i]);
+    i++;
+}
+while(j < indeks)
+{
+    void *ptr;
+    pthread_join(tid2[j], &ptr);
+    j++;
+}
+```
+Thread diatas adalah untuk command -d dan * ```pthread_create``` dan ```pthread_join``` akan dibuat sebanyak kategori yang ingin dibuat dari file yang ada pada direktori tersebut.
