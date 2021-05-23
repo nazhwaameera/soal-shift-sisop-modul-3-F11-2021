@@ -137,6 +137,7 @@ char y = '.';
 dir = strrchr(file, x); // yang pertama kali dijumpai
 ndir = strchr(file, y);
 ```
+```strrchr``` digunakan untuk mendapatkan string yang dipisahkan dengan tanda / dengan mengecek dari string bagian belakang. Sedangkan, ```strchr``` digunakan untuk mendapatkan string yang dipisahkan dengan tanda . dengan mengecek dari string bagian depan.
 
 ### Bagian b
 Program juga dapat menerima opsi -d untuk melakukan pengkategorian pada suatu directory. Namun pada opsi -d ini, user hanya bisa memasukkan input 1 directory saja, tidak seperti file yang bebas menginput file sebanyak mungkin. Lalu hasilnya akan disimpan di working directory dimana program C tersebut berjalan (hasil kategori filenya bukan di /path/to/directory). Dengan output yakni *"Direktori sukses disimpan!"* jika berhasil, dan *"Yah, gagal disimpan :("* jika gagal.
