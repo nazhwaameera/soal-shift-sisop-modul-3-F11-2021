@@ -4,35 +4,39 @@ Repository soal shift sisop modul 3 kelompok 11 kelas F
 ## Soal 1
 
 ## Soal 2
-Crypto (kamu) adalah teman Loba. Pada suatu padi, Crypto melihat Loba yang sedang kewalahan mengerjakan tugas dari bosnya. Karena Crypto adalah orang yang sangat menyukai tantangan, dia ingin membantu Loba mengerjakan tugasnya. Detail dari tugas tersebut adalah:
-a.	Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya. Matriks nantinya akan berisi angka 1-20
-b.	Membuat program dengan menggunakan matriks output dari program sebelumnya (program soal 2a.c) (Catatan!: gunakan shared memory). Kemudian matriks tersebut akan dilakukan perhitungan dengan matriks varu (input user) sebagai berikut contoh perhitungan untuk matriks yang ada. Perhitungannya adalah setiap sel yang berasal dari matriks A menjadi angka untuk faktorial, lalu sel dari matriks B menjadi batas maksimal faktorialnya (dari paling besar ke paling kecil) (Catatan!: guankan thread untuk perhitungan di setiap sel).
-c.	Karena takut lag dalam pengerjaannya membantu Loba, Crypto juga membuat program (soal2c.c) untuk mengecek 5 proses teratas apa saja yang memakan resource komputernya dengan command “ps aux | sort -nrk 3,3 | head -5” (Catatan!: harus menggunakan IPC Pipes)
+Crypto (kamu) adalah teman Loba. Pada suatu pagi, Crypto melihat Loba yang sedang kewalahan mengerjakan tugas dari bosnya. Karena Crypto adalah orang yang sangat menyukai tantangan, dia ingin membantu Loba mengerjakan tugasnya. Detail dari tugas tersebut adalah :
+
+a. Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya. Matriks nantinya akan berisi angka 1-20
+
+b. Membuat program dengan menggunakan matriks output dari program sebelumnya (program soal 2a.c) (Catatan : gunakan shared memory). Kemudian matriks tersebut akan dilakukan perhitungan dengan matriks baru (input user) sebagai berikut contoh perhitungan untuk matriks yang ada. Perhitungannya adalah setiap sel yang berasal dari matriks A menjadi angka untuk faktorial, lalu sel dari matriks B menjadi batas maksimal faktorialnya (dari paling besar ke paling kecil) (Catatan : gunakan thread untuk perhitungan di setiap sel).
+
+c. Karena takut lag dalam pengerjaannya membantu Loba, Crypto juga membuat program (soal2c.c) untuk mengecek 5 proses teratas apa saja yang memakan resource komputernya dengan command “ps aux | sort -nrk 3,3 | head -5” (Catatan : harus menggunakan IPC Pipes)
+
 Dari soal di atas, dapat diketahui bahwa kita diminta untuk:
-1.	Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya
-2.	Menyimpan hasil perkalian program perkalian matriks tersebut ke dalam shared memory
-3.	Membuat program yang menerima input berupa matriks 4 × 6 untuk kemudian dioperasikan dengan matriks hasil perkalian program pertama
-4.	Membuat program untuk mengecek 5 proses teratas yang  memakan resource komputer menggunakan IPC Pipes dan command “ps aux | sort -nrk 3,3 | head -5”
+1. Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya
+2. Menyimpan hasil perkalian program perkalian matriks tersebut ke dalam shared memory
+3. Membuat program yang menerima input berupa matriks 4 × 6 untuk kemudian dioperasikan dengan matriks hasil perkalian program pertama
+4. Membuat program untuk mengecek 5 proses teratas yang  memakan resource komputer menggunakan IPC Pipes dan command “ps aux | sort -nrk 3,3 | head -5”
+
 Untuk menyelesaikannya, dibuat program seperti di bawah ini.
-Untuk menyelesaikan nomor 1, kita menggunakan  
+Untuk menyelesaikan nomor 1, kita menggunakan :  
 ```C
 for(c = 0; c < 4; c++)
-    {
-        for(d = 0; d < 6; d++)
+{
+	for(d = 0; d < 6; d++)
         {
             for(k = 0; k < 3; k++)
             {
                 sum = sum + first[c][k] * second[k][d];
             }
-            
             value[c][d] = sum;
             sum = 0;
         }
-    }
+}
 ```
-Program ini akan menghitung perkalian matriks 4 × 3 dengan 3 × 6 yang telah diinputkan dan menyimpan hasilnya di array value.
-Array 4 × 3 dengan 3 × 6 sendiri disimpan menggunakan array.
-Seperti yang kita ketahui, program kedua meminta kita untuk mengoperasikan matriks baru dengna matriks hasil perkalian 4 × 3 dengan 3 × 6 yang kita dapat dari program ini. Untuk itu, kita perlu menyimpan matriks hasil perkalian program ini ke dalam shared memory. Syntax untuk shared memory adalah
+Program ini akan menghitung perkalian matriks 4 × 3 dengan 3 × 6 yang telah diinputkan dan menyimpan hasilnya di array value. Array 4 × 3 dengan 3 × 6 sendiri disimpan menggunakan array.
+
+Seperti yang kita ketahui, program kedua meminta kita untuk mengoperasikan matriks baru dengna matriks hasil perkalian 4 × 3 dengan 3 × 6 yang kita dapat dari program ini. Untuk itu, kita perlu menyimpan matriks hasil perkalian program ini ke dalam shared memory. Syntax untuk shared memory adalah :
 ```C
 key_t key = 1234;
     int (*value)[6];
@@ -85,14 +89,14 @@ Ketiga fungsi di atas digunakan dalam perhitungan faktorial seperti yang diminta
 Kita perlu mengakses shared memory dan membuat thread untuk soal kali ini.
 ```C
 key_t key = 1234;
-    int (*value)[6];
-    int shmid = shmget(key, sizeof(int[4][6]), IPC_CREAT | 0666);
-    value = shmat(shmid, NULL, 0);
+int (*value)[6];
+int shmid = shmget(key, sizeof(int[4][6]), IPC_CREAT | 0666);
+value = shmat(shmid, NULL, 0);
 
 pthread_t tid[24];
 Setelah menginisiasi thread dan shared memorynya, fungsi berikut akan mengakses shared memory tersebut dan membuat thread untuk setiap proses komputasinya.
 for(c = 0; c < 4; c++)
-    {
+{
         for(d = 0; d < 6; d++)
         {
             long long *k = malloc(sizeof(long long[4][6]));
@@ -106,22 +110,23 @@ for(c = 0; c < 4; c++)
             sleep(1);
         }
         printf("\n");
-    }
+}
 ```
-Kita kemudian menggabungkan semua thread yang sudah selesai menggunakan 
+Kita kemudian menggabungkan semua thread yang sudah selesai menggunakan : 
 ```C
 for(int i = 0; i < index; i++)
-    {
-        pthread_join(tid[i], NULL);
-    }
+{ 
+    pthread_join(tid[i], NULL);
+}
 ```
-Untuk subsoal terakhir, kita diminta untuk mengecek 5 proses teratas yang memakan resource komputer menggunakan command “ps aux | sort -nrk 3,3 | head -5” dan IPC Pipes
+Untuk subsoal terakhir, kita diminta untuk mengecek 5 proses teratas yang memakan resource komputer menggunakan command “ps aux | sort -nrk 3,3 | head -5” dan IPC Pipes :
 ```C
 int pid;
 int pipe1[2];
 int pipe2[2];
 
-void exec1() {
+void exec1() 
+{
   // input from stdin (already done)
   // output to pipe1
   dup2(pipe1[1], 1);
@@ -133,7 +138,8 @@ void exec1() {
   _exit(1);
 }
 
-void exec2() {
+void exec2() 
+{
   // input from pipe1
   dup2(pipe1[0], 0);
   // output to pipe2
@@ -149,7 +155,8 @@ void exec2() {
   _exit(1);
 }
 
-void exec3() {
+void exec3() 
+{
   // input from pipe2
   dup2(pipe2[0], 0);
   // output to stdout (already done)
