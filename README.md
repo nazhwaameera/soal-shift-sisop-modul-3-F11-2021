@@ -136,5 +136,6 @@ Dibawah ini adalah isi di dalam masing-masing folder yang sudah terkategorikan :
 ### Bagian b
 Program juga dapat menerima opsi -d untuk melakukan pengkategorian pada suatu directory. Namun pada opsi -d ini, user hanya bisa memasukkan input 1 directory saja, tidak seperti file yang bebas menginput file sebanyak mungkin. Lalu hasilnya akan disimpan di working directory dimana program C tersebut berjalan (hasil kategori filenya bukan di /path/to/directory). Berikut contoh outputnya :
 
-**"Direktori sukses disimpan! (jika berhasil)**
-**Yah, gagal disimpan :( (jika gagal)**
+**"Direktori sukses disimpan!" (jika berhasil)**
+
+**"Yah, gagal disimpan :(" (jika gagal)**
