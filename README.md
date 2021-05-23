@@ -341,7 +341,9 @@ if(pilihan[0]=='d' && pilihan[1]=='e'){
         }
 ```
 berikut hasil setelah menjalankan perintah `delete`
-![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/filedelete.PNG?raw=true )
+
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/fileDelete.PNG?raw=true )
+
 ![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/tsvdelete.PNG?raw=true )
 
 ## Soal F
