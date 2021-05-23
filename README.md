@@ -120,6 +120,7 @@ if(strcmp(argv[1], "-f") == 0)
 ```
 Dibawah ini adalah file dengan kategori berbeda yang terdapat dalam satu direktori yang sama.
 <img width="593" alt="Screen Shot 2021-05-23 at 10 55 11" src="https://user-images.githubusercontent.com/74484044/119247691-0fe46380-bbb6-11eb-93bb-c6052cf36eea.png">
+
 Lalu kita coba jalankan opsi -f dan saya mengkategorikan file 3.zip, 4.png, 8.log, 7.heic, serta 66.jpg
 <img width="565" alt="Screen Shot 2021-05-23 at 10 57 14" src="https://user-images.githubusercontent.com/74484044/119247692-11159080-bbb6-11eb-9e34-0b0a245eaa74.png">
 **Note :** File ke 5 yakni 66.jpg gagal dikategorikan karena tidak ada file dengan nama tersebut, yang ada yakni 6.jpg, maka keluar output File 5 : Sad, gagal:(
