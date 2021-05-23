@@ -221,3 +221,29 @@ Sebelum menjalankan argumen *
 <img width="672" alt="Screen Shot 2021-05-23 at 15 35 38" src="https://user-images.githubusercontent.com/74484044/119253727-c65b3f00-bbdc-11eb-9e84-106e0aa58e48.png">
 Sesudah menjalankan argumen * maka seluruh file yang ada akan masuk ke dalam folder sesuai dengan kategorinya masing-masing.
 <img width="697" alt="Screen Shot 2021-05-23 at 15 40 20" src="https://user-images.githubusercontent.com/74484044/119253824-3b2e7900-bbdd-11eb-8736-27638bbaa92a.png">
+
+### Bagian d
+Semua file harus berada di dalam folder, jika terdapat file yang tidak memiliki ekstensi, file disimpan dalam folder “Unknown”. Jika file hidden, masuk folder “Hidden”.
+```C
+void cekExt(char* namafile, char *ext1) // cek extension
+{
+    char *ext2 = strchr(namafile, '.'); // kalau ada 2 ext, ambil yang paling depan
+    if(ext2 == namafile)
+    {
+        strcpy(ext1, "Hidden");
+    }
+    else if(ext2 == NULL)
+    {
+        strcpy(ext1, "Unknown");
+    }
+    else
+    {
+        strcpy(ext1, ext2 + 1);
+        for(int x = 0; x < strlen(ext1); x++) // untuk ubah jadi lowercase
+        {
+            ext1[x] = tolower(ext1[x]);
+        }
+    }
+}
+```
+File yang tidak memiliki extension dibelakanganya akan dikategorikan sebagai Unknown. Sedangkan untuk nama extension yang ditulis dengan uppercase dapat diubah menjadi lowercase dengan menggunakan tolower seperti diatas.
