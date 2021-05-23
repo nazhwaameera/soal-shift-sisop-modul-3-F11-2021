@@ -205,3 +205,15 @@ Kita akan mengkategorikan file yang berada pada direktori soal3 seperti berikut.
 <img width="565" alt="Screen Shot 2021-05-23 at 15 21 33" src="https://user-images.githubusercontent.com/74484044/119253266-a1fe6300-bbda-11eb-9b1e-d9e012b6ee50.png">
 Dan akan dipindahkan di current working directory dimana tempat kodingan C berada.
 <img width="692" alt="Screen Shot 2021-05-23 at 15 20 41" src="https://user-images.githubusercontent.com/74484044/119253268-a32f9000-bbda-11eb-92c9-5d89b65b02f7.png">
+
+### Bagian c
+Selain menerima opsi-opsi di atas, program ini menerima opsi * yaitu mengkategorikan seluruh file yang ada di working directory ketika menjalankan program C tersebut.
+- Menerima argumen *
+```C
+else if(strcmp(argv[1], "*") == 0)
+{
+    strcpy(dir, src);
+}
+```
+Menggunakan ```strcmp``` untuk membandingkan argumen input, apakah sesuai dengan argumen input yang diminta yakni * dan path tersebut akan disimpan di sebuah char dir.
+- Output :
