@@ -92,7 +92,7 @@ void* moveFile2(void *arg) // untuk opsi -f
     return 0;
 }
 ```
-Dan berikut fungsi untuk opsi -f :
+Menerima argumen -f :
 ```C
 if(strcmp(argv[1], "-f") == 0)
 {
