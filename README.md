@@ -12,10 +12,10 @@ Crypto (kamu) adalah teman Loba. Pada suatu pagi, Crypto melihat Loba yang sedan
 
 **c.** Karena takut lag dalam pengerjaannya membantu Loba, Crypto juga membuat program (soal2c.c) untuk mengecek 5 proses teratas apa saja yang memakan resource komputernya dengan command “ps aux | sort -nrk 3,3 | head -5” (Catatan : harus menggunakan IPC Pipes)
 
-Dari soal di atas, dapat diketahui bahwa kita diminta untuk:
-1. Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya
-2. Menyimpan hasil perkalian program perkalian matriks tersebut ke dalam shared memory
-3. Membuat program yang menerima input berupa matriks 4 × 6 untuk kemudian dioperasikan dengan matriks hasil perkalian program pertama
+Dari soal di atas, dapat diketahui bahwa kita diminta untuk :
+1. Membuat program perkalian matriks (4 × 3 dengan 3 × 6) dan menampilkan hasilnya.
+2. Menyimpan hasil perkalian program perkalian matriks tersebut ke dalam shared memory.
+3. Membuat program yang menerima input berupa matriks 4 × 6 untuk kemudian dioperasikan dengan matriks hasil perkalian program pertama.
 4. Membuat program untuk mengecek 5 proses teratas yang  memakan resource komputer menggunakan IPC Pipes dan command “ps aux | sort -nrk 3,3 | head -5”
 
 Untuk menyelesaikannya, dibuat program seperti di bawah ini.
