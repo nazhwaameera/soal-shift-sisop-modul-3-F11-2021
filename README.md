@@ -169,7 +169,8 @@ void exec3()
   _exit(1);
 }
 ```
-Hasil:
+Hasil :
+
 ![VirtualBox_Ubuntu 2 0_23_05_2021_17_03_22](https://user-images.githubusercontent.com/68385532/119256948-55705300-bbed-11eb-9d84-41cc233c92c3.png)
 ![VirtualBox_Ubuntu 2 0_23_05_2021_17_04_06](https://user-images.githubusercontent.com/68385532/119256944-530df900-bbed-11eb-812b-7d0852b444bc.png)
 
