@@ -62,9 +62,18 @@ berikut adalah kodingannya dalam file server.c
             
     }
 ```
+
 tampilan jika berhasil login dan berhasil register
+
 ![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/register.PNG?raw=true )
+
 ![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/login.PNG?raw=true )
+
+untuk multi connection saat ini belum bisa hingga seperti berikut
+
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/logingagal.PNG?raw=true )
+
+
 ## Soal b
 diminta untuk membuat  database yang bernama files.tsv. Isi dari files.tsv ini adalah path file saat berada di server, publisher, dan tahun publikasi. Setiap penambahan dan penghapusan file pada folder file yang bernama  FILES pada server akan memengaruhi isi dari files.tsv. Folder FILES otomatis dibuat saat server dijalankan
 client mengirim string input_file yang berisi (nama file, publisher, tahun publikasi, ekstensi, filepath) ke server. untuk kodingannya digabung dengan soal c
@@ -186,7 +195,9 @@ server menerima string input_file lalu memasukkan ke dalam file files.tsv lalu m
   }
 ```
 berikut adalah hasil screenshot isi FILES dan files.tsv setelah `add` 
+
 ![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/addF.PNG?raw=true )
+
 ![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/addtsv.PNG?raw=true )
 
 
@@ -277,6 +288,7 @@ if(pilihan[0]=='d' && pilihan[1]=='o'){
         }
 ```
 berikut adalah hasil download
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/download.PNG?raw=true )
 
 ## Soal E
 pada soal E diminta untuk membuat perintah `Delete`. ketika perintah dijalankan file yang ingin didelete tetap ada hanya saja diganti nama filenya menjadi `old-NamaFile.ekstensi`. tetapi pada file.tsv row yang menunjuk ke nama file tersebut dihapus.
@@ -329,19 +341,27 @@ if(pilihan[0]=='d' && pilihan[1]=='e'){
         }
 ```
 berikut hasil setelah menjalankan perintah `delete`
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/filedelete.PNG?raw=true )
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/tsvdelete.PNG?raw=true )
 
 ## Soal F
 Client dapat melihat semua isi files.tsv dengan memanggil suatu perintah yang bernama see. untuk kodingan akan ada di gabung dengan soal G
 
-## perintah `see` dan `find`
-jika perintah `see` server mengirim semua isi dari `files.tsv` sebagai sebuah string ke client
+## Soal G
+Aplikasi client juga dapat melakukan pencarian dengan memberikan suatu string. Hasilnya adalah semua nama file yang mengandung string tersebut. Format output seperti format output f. aplikasi membuat perintah `find` untuk mencari file tersebut.
 
-jika perintah `find` server mengirim isi dari `files.tsv` yang tiap barisnya berisi kata yang dicari dari client
-```
+### perintah `see` dan `find`
+perintah `see` server mengirim semua isi dari `files.tsv` sebagai sebuah string ke client
+
+perintah `find` server mengirim isi dari `files.tsv` yang tiap barisnya berisi kata yang dicari dari client
+
+berikut adalah kodingan untuk `find` dan `see`
+
+```C
 if(pilihan[0]=='s'){
             char line[1024], data_file[1024] ;
 
-            //mengirim file files.tsc ke client
+            
             FILE* srcFile = fopen("files.tsv", "r");
             while (fgets(line , sizeof(line) , srcFile )!= NULL)
             {   
@@ -367,9 +387,10 @@ if(pilihan[0]=='s'){
         }
 ```
 
-client mencetak string yang telah dikirim server sesuai format yang diinginkan untuk tiap barisnya atau filenya
-```
-if(pilihan[0]=='s' || pilihan[0]=='f'){
+client mencetak string yang telah dikirim server.
+```C
+
+  if(pilihan[0]=='s' || pilihan[0]=='f'){
             if(pilihan[0]=='f'){
                 char word[100];
                 scanf("%s", word);
@@ -388,22 +409,22 @@ if(pilihan[0]=='s' || pilihan[0]=='f'){
             int i=0;
             while(1){
                 printf("\nNama: ");
-                while(line[i] != ','){
+                while(line[i] != '\t'){
                     printf("%c", line[i++]);
                 }
                 i++;
                 printf("\nPublisher: ");
-                while(line[i] != ','){
+                while(line[i] != '\t'){
                     printf("%c", line[i++]);
                 }
                 i++;
                 printf("\nTahun Publishing: ");
-                while(line[i] != ','){
+                while(line[i] != '\t'){
                     printf("%c", line[i++]);
                 }
                 i++;
                 printf("\nEkstensi File: ");
-                while(line[i] != ','){
+                while(line[i] != '\t'){
                     printf("%c", line[i++]);
                 }
                 i++;
@@ -419,8 +440,15 @@ if(pilihan[0]=='s' || pilihan[0]=='f'){
             printf("\n");
         }
 ```
+berikut adalah hasil run perintah `see` dan `find`
 
-## menambah `running.log`
+
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/see.PNG?raw=true )
+![punya taq](https://github.com/EEB12/Alarm-Pendeteksi-gas/blob/main/Arduino/find.PNG?raw=true )
+
+## soal H
+membuat log untuk tiap pertambahan dan penghapusan file di server dengan log bernama running.log. 
+ 
 fungsi addRunning() dengan tiga argumen yaitu :
 - `isi1` yaitu string yang berisi tambah atau hapus.
 - `isi2` yaitu string yang berisi nama file yang ditambah atau dihapus.
